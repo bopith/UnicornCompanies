@@ -44,13 +44,27 @@ Exec sp_rename 'dbo.unicorn_finance.[Select Investors]', 'SelectInvestors', 'COL
 
 --------------------------------------------------------------------------------------------------------
 
--- Standardize date joined format
+-- Standardize date joined format & break out date joined into individual columns (Year, Month, Day)
 
 Alter Table UnicornCompanies.dbo.unicorn_finance
 Add DateJoinedConverted Date
-
 Update UnicornCompanies.dbo.unicorn_finance
 Set DateJoinedConverted = Convert(Date, DateJoined)
+
+Alter Table UnicornCompanies.dbo.unicorn_finance
+Add Year int
+Update UnicornCompanies.dbo.unicorn_finance
+Set Year = datepart(year, DateJoinedConverted)
+
+Alter Table UnicornCompanies.dbo.unicorn_finance
+Add Month int
+Update UnicornCompanies.dbo.unicorn_finance
+Set Month = datepart(month, DateJoinedConverted)
+
+Alter Table UnicornCompanies.dbo.unicorn_finance
+Add Day int
+Update UnicornCompanies.dbo.unicorn_finance
+Set Day = datepart(day, DateJoinedConverted)
 
 Select *
 From UnicornCompanies.dbo.unicorn_finance
