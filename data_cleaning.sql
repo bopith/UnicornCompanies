@@ -7,11 +7,11 @@ Data Cleaning for Unicorn Companies Analytics Project
 
 Select *
 From UnicornCompanies.dbo.unicorn_info
-Order by Company
+Order by ID
 
 Select *
 From UnicornCompanies.dbo.unicorn_finance
-Order by Company
+Order by ID
 
 --------------------------------------------------------------------------------------------------------
 
@@ -37,24 +37,52 @@ Having Count(Company) > 1
 Select *
 From UnicornCompanies.dbo.unicorn_finance
 
-
-EXEC sp_rename 'dbo.unicorn_finance.[Date Joined]', 'DateJoined', 'COLUMN'
-EXEC sp_rename 'dbo.unicorn_finance.[Year Founded]', 'YearFounded', 'COLUMN'
-EXEC sp_rename 'dbo.unicorn_finance.[Select Investors]', 'SelectInvestors', 'COLUMN'
+Exec sp_rename 'dbo.unicorn_finance.[Date Joined]', 'DateJoined', 'COLUMN'
+Exec sp_rename 'dbo.unicorn_finance.[Year Founded]', 'YearFounded', 'COLUMN'
+Exec sp_rename 'dbo.unicorn_finance.[Select Investors]', 'SelectInvestors', 'COLUMN'
 
 
 --------------------------------------------------------------------------------------------------------
 
 -- Standardize date joined format
 
-ALTER TABLE UnicornCompanies.dbo.unicorn_finance
+Alter Table UnicornCompanies.dbo.unicorn_finance
 Add DateJoinedConverted Date
 
 Update UnicornCompanies.dbo.unicorn_finance
-SET DateJoinedConverted = CONVERT(Date, DateJoined)
+Set DateJoinedConverted = Convert(Date, DateJoined)
 
 Select *
 From UnicornCompanies.dbo.unicorn_finance
 
 
+--------------------------------------------------------------------------------------------------------
 
+-- Reformat currency value
+
+-- "Valuation" and "Funding" columns
+
+Update UnicornCompanies.dbo.unicorn_finance
+Set Valuation = RIGHT(Valuation, LEN(Valuation) - 1)
+
+Update UnicornCompanies.dbo.unicorn_finance
+Set Valuation = Replace(Replace(Valuation, 'B','000000000'), 'M', '000000')
+
+Update UnicornCompanies.dbo.unicorn_finance
+Set Funding = Replace(Replace(Funding, 'B','000000000'), 'M', '000000')
+
+Select *
+From UnicornCompanies.dbo.unicorn_finance
+
+
+--------------------------------------------------------------------------------------------------------
+
+-- Delete Unused Columns
+
+Alter Table UnicornCompanies.dbo.unicorn_finance
+Drop Column DateJoined
+
+Exec sp_rename 'dbo.unicorn_finance.DateJoinedConverted', 'DateJoined', 'COLUMN'
+
+Select *
+From UnicornCompanies.dbo.unicorn_finance
