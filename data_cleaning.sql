@@ -43,4 +43,18 @@ EXEC sp_rename 'dbo.unicorn_finance.[Year Founded]', 'YearFounded', 'COLUMN'
 EXEC sp_rename 'dbo.unicorn_finance.[Select Investors]', 'SelectInvestors', 'COLUMN'
 
 
+--------------------------------------------------------------------------------------------------------
+
+-- Standardize date joined format
+
+ALTER TABLE UnicornCompanies.dbo.unicorn_finance
+Add DateJoinedConverted Date
+
+Update UnicornCompanies.dbo.unicorn_finance
+SET DateJoinedConverted = CONVERT(Date, DateJoined)
+
+Select *
+From UnicornCompanies.dbo.unicorn_finance
+
+
 
