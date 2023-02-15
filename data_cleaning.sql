@@ -33,12 +33,12 @@ Having Count(Company) > 1
 
 --------------------------------------------------------------------------------------------------------
 
--- Rename columns in dbo.unicorn_finance
+-- Rename columns
 Select *
 From UnicornCompanies.dbo.unicorn_finance
 
+Exec sp_rename 'dbo.unicorn_info.[Year Founded]', 'YearFounded', 'COLUMN'
 Exec sp_rename 'dbo.unicorn_finance.[Date Joined]', 'DateJoined', 'COLUMN'
-Exec sp_rename 'dbo.unicorn_finance.[Year Founded]', 'YearFounded', 'COLUMN'
 Exec sp_rename 'dbo.unicorn_finance.[Select Investors]', 'SelectInvestors', 'COLUMN'
 
 
