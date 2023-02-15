@@ -16,16 +16,31 @@ Order by Company
 --------------------------------------------------------------------------------------------------------
 
 -- Check duplicate company name
-Select Company, COUNT(Company)
-FROM UnicornCompanies.dbo.unicorn_info
-GROUP BY Company
-HAVING COUNT(Company) > 1
 
-Select Company, COUNT(Company)
-FROM UnicornCompanies.dbo.unicorn_finance
-GROUP BY Company
-HAVING COUNT(Company) > 1
+Select Company, Count(Company)
+From UnicornCompanies.dbo.unicorn_info
+Group by Company
+Having Count(Company) > 1
 
--- > Bolt and Fabric appear twice in both data sets. Anyway, they are in different cities / countries.
+Select Company, Count(Company)
+From UnicornCompanies.dbo.unicorn_finance
+Group by Company
+Having Count(Company) > 1
+
+-- > Bolt and Fabric appear twice in both data sets. Anyway, they are in different cities / countries. 
+-- > Therefore, we will keep those data.
+
+
+--------------------------------------------------------------------------------------------------------
+
+-- Rename columns in dbo.unicorn_finance
+Select *
+From UnicornCompanies.dbo.unicorn_finance
+
+
+EXEC sp_rename 'dbo.unicorn_finance.[Date Joined]', 'DateJoined', 'COLUMN'
+EXEC sp_rename 'dbo.unicorn_finance.[Year Founded]', 'YearFounded', 'COLUMN'
+EXEC sp_rename 'dbo.unicorn_finance.[Select Investors]', 'SelectInvestors', 'COLUMN'
+
 
 
