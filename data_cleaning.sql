@@ -34,12 +34,13 @@ Having Count(Company) > 1
 --------------------------------------------------------------------------------------------------------
 
 -- Rename columns
-Select *
-From UnicornCompanies.dbo.unicorn_finance
 
 Exec sp_rename 'dbo.unicorn_info.[Year Founded]', 'YearFounded', 'COLUMN'
 Exec sp_rename 'dbo.unicorn_finance.[Date Joined]', 'DateJoined', 'COLUMN'
 Exec sp_rename 'dbo.unicorn_finance.[Select Investors]', 'SelectInvestors', 'COLUMN'
+
+Select *
+From UnicornCompanies.dbo.unicorn_finance
 
 
 --------------------------------------------------------------------------------------------------------
@@ -77,10 +78,13 @@ From UnicornCompanies.dbo.unicorn_finance
 -- "Valuation" and "Funding" columns
 
 Update UnicornCompanies.dbo.unicorn_finance
-Set Valuation = RIGHT(Valuation, LEN(Valuation) - 1)
+Set Valuation = Right(Valuation, LEN(Valuation) - 1)
 
 Update UnicornCompanies.dbo.unicorn_finance
 Set Valuation = Replace(Replace(Valuation, 'B','000000000'), 'M', '000000')
+
+Update UnicornCompanies.dbo.unicorn_finance
+Set Funding = Right(Funding, LEN(Funding) - 1)
 
 Update UnicornCompanies.dbo.unicorn_finance
 Set Funding = Replace(Replace(Funding, 'B','000000000'), 'M', '000000')
