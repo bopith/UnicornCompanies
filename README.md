@@ -1,10 +1,7 @@
 # Unicorn Companies Analysis
 
 
-<img alt="GitHub" src="https://img.shields.io/github/license/bopith/UnicornCompanies?style=for-the-badge"> 
-
-![https://linkedin.com/in/bopithbun](https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555)
-
+<img alt="GitHub" src="https://img.shields.io/github/license/bopith/UnicornCompanies?style=for-the-badge">  [![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555)](https://www.linkedin.com/in/bopithbun/)
 
 This repository contains SQL queries, PowerPoint presentation for the analytical project on 1060 unicorn companies in 46 countries around the world. This project aims to explore the answers to the following questions:
 1. Which unicorn companies have had the biggest return on investment?
