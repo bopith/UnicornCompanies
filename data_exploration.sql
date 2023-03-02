@@ -25,6 +25,29 @@ SELECT *
 FROM UnicornCompanies.dbo.unicorn_finance
 ORDER BY 1 ASC
 
+-- Total Unicorn Companies
+WITH UnicornCom (ID, Company, Industry, City, Country, Continent, Valuation, Funding, YearFounded, Year, SelectInvestors) AS
+	(SELECT inf.ID, inf.Company, inf.Industry, inf.City, inf.Country, inf.Continent, fin.Valuation, fin.Funding, inf.YearFounded, 
+			fin.Year, fin.SelectInvestors
+	FROM UnicornCompanies.dbo.unicorn_info AS inf
+	INNER JOIN UnicornCompanies.dbo.unicorn_finance AS fin 
+		ON inf.ID = fin.ID)
+SELECT COUNT(1) AS Unicorn
+FROM UnicornCom
+WHERE (Year - YearFounded) >= 0
+
+
+-- Total Countries
+WITH UnicornCom (ID, Company, Industry, City, Country, Continent, Valuation, Funding, YearFounded, Year, SelectInvestors) AS
+	(SELECT inf.ID, inf.Company, inf.Industry, inf.City, inf.Country, inf.Continent, fin.Valuation, fin.Funding, inf.YearFounded, 
+			fin.Year, fin.SelectInvestors
+	FROM UnicornCompanies.dbo.unicorn_info AS inf
+	INNER JOIN UnicornCompanies.dbo.unicorn_finance AS fin 
+		ON inf.ID = fin.ID)
+SELECT COUNT(DISTINCT Country) AS Country
+FROM UnicornCom
+WHERE (Year - YearFounded) >= 0
+
 
 --------------------------------------------------------------------------------------------------------
 
@@ -54,7 +77,7 @@ WITH UnicornCom (ID, Company, Industry, City, Country, Continent, Valuation, Fun
 	FROM UnicornCompanies.dbo.unicorn_info AS inf
 	INNER JOIN UnicornCompanies.dbo.unicorn_finance AS fin 
 		ON inf.ID = fin.ID)
-SELECT CAST(AVG(Year - YearFounded) AS INT)
+SELECT CAST(AVG(Year - YearFounded) AS INT) AS AverageYear
 FROM UnicornCom
 
 -- > On average it takes 6 years to become a unicorn company
@@ -68,7 +91,7 @@ WITH UnicornCom (ID, Company, Industry, City, Country, Continent, Valuation, Fun
 	FROM UnicornCompanies.dbo.unicorn_info AS inf
 	INNER JOIN UnicornCompanies.dbo.unicorn_finance AS fin 
 		ON inf.ID = fin.ID)
-SELECT TOP 10 (Year - YearFounded) AS CompanyAge, COUNT(1) AS Frequency
+SELECT TOP 10 (Year - YearFounded) AS UnicornYear, COUNT(1) AS Frequency
 FROM UnicornCom
 WHERE (Year - YearFounded) >= 0
 GROUP BY (Year - YearFounded)
@@ -110,7 +133,7 @@ WITH UnicornCom (ID, Company, Industry, City, Country, Continent, Valuation, Fun
 	INNER JOIN UnicornCompanies.dbo.unicorn_finance AS fin
 		ON inf.ID = fin.ID
 )
-SELECT Industry, Count(1) AS Frequency, COUNT(1) * 100.0 / (SELECT COUNT(*) FROM UnicornCom) AS 'Percentage'
+SELECT Industry, Count(1) AS Frequency, CAST(COUNT(1) * 100.0 / (SELECT COUNT(*) FROM UnicornCom) AS INT) AS 'Percentage'
 FROM UnicornCom
 WHERE (Year - YearFounded) >= 0
 GROUP BY Industry
@@ -133,7 +156,7 @@ WITH UnicornCom (ID, Company, Industry, City, Country, Continent, Valuation, Fun
 	INNER JOIN UnicornCompanies.dbo.unicorn_finance AS fin
 		ON inf.ID = fin.ID
 )
-SELECT TOP 10 Country, COUNT(1) AS Frequency
+SELECT Country, COUNT(1) AS Frequency
 FROM UnicornCom
 WHERE (Year - YearFounded) >= 0
 GROUP BY Country
@@ -151,7 +174,7 @@ WITH UnicornCom (ID, Company, Industry, City, Country, Continent, Valuation, Fun
 	INNER JOIN UnicornCompanies.dbo.unicorn_finance AS fin
 		ON inf.ID = fin.ID
 )
-SELECT TOP 10 Country, COUNT(1) AS Frequency, COUNT(1) * 100.0 / (SELECT COUNT(*) FROM UnicornCom) AS 'Percentage'
+SELECT TOP 10 Country, COUNT(1) AS Frequency, CAST(COUNT(1) * 100.0 / (SELECT COUNT(*) FROM UnicornCom) AS INT) AS 'Percentage'
 FROM UnicornCom
 WHERE (Year - YearFounded) >= 0
 GROUP BY Country
