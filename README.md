@@ -3,7 +3,7 @@
 
 <img alt="GitHub" src="https://img.shields.io/github/license/bopith/UnicornCompanies?style=for-the-badge">  [![LinkedIn](https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555)](https://www.linkedin.com/in/bopithbun/)
 
-This repository contains SQL queries, PowerPoint presentation for the analytical project on 1060 unicorn companies in 46 countries around the world. This project aims to explore the answers to the following questions:
+This repository contains SQL queries and the slide presentation for the analytical project on 1060 unicorn companies in 46 countries worldwide. This project aims at exploring the answers to the following questions:
 1. Which unicorn companies have had the biggest return on investment?
 2. How long does it usually take for a company to become a unicorn?
 3. Which industries have the most unicorns? 
@@ -36,7 +36,14 @@ Information on the dataset include:
 
 ## Analytical Results
 
-Query outputs and the summary of analytical results are presented in `uc_analytical_results.pptx`. 
+Brief findings of this project are:
+1. Zapier has the biggest return on investment.
+2. It usually takes about 6 years to become a unicorn.
+3. Fintech industry has the most unicorns.
+4. The United States has the most unicorns.
+5. Accel has funded the most unicorns.
+
+Please check `uc_analytical_results.pdf` for more details and meaningful discussion on query outputs and analytical results.
 
 
 ## License
