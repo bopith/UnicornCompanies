@@ -48,6 +48,8 @@ Brief findings of this project are:
 
 Please check `uc_analytical_results.pdf` for more details and meaningful discussion on query outputs and analytical results.
 
+Tableau Dashboard:
+![Dashboard](/img/dashboard.png?raw=true)
 
 ## License
 
