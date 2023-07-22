@@ -51,10 +51,6 @@ Please check `uc_analytical_results.pdf` for more details and meaningful discuss
 Tableau Dashboard:
 ![Dashboard](/img/dashboard.png?raw=true)
 
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
 
 ## Acknowledgments
 
